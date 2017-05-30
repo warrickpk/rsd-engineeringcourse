@@ -1,0 +1,1445 @@
+
+
+
+
+
+<!DOCTYPE html>
+<!--[if IE 7]> <html lang="en" class="lt-ie9 lt-ie8 no-js"> <![endif]-->
+<!--[if IE 8]> <html lang="en" class="lt-ie9 no-js"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset=utf-8 />
+    <meta name="author" content="UCL" />
+    <meta name="description" content="UCL Homepage" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- social meta -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@uclnews">
+    <meta name="twitter:title" content="UCL - London's Global University">
+    <meta name="twitter:description" content="UCL (University College London) is London's leading multidisciplinary university, with 8,000 staff and 25,000 students.">
+    <meta name="twitter:creator" content="@UCLWAMS">
+    <meta name="twitter:image:src" content="http://www.ucl.ac.uk/visual-identity/logos/standalone.png">
+    <meta property="og:image" content="http://www.ucl.ac.uk/visual-identity/logos/standalone.png" />
+    <meta property="og:title" content="UCL - London's Global University" />
+    <meta property="og:url" content="http://www.ucl.ac.uk" />
+    <meta property="og:site_name" content="UCL" />
+    <meta property="og:description" content="UCL (University College London) is London's leading multidisciplinary university, with 8,000 staff and 25,000 students." />
+    <meta property="og:type" content="website" />
+    <meta property="og:profile_id" content="uclofficial" />
+    <!-- end social meta -->
+
+  <title>Cython</title>
+
+  <link href="/rsd-engineeringcourse/css/screen.min.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="/rsd-engineeringcourse/css/jekyll-styles.css" rel="stylesheet" type="text/css">
+  <link href="/rsd-engineeringcourse/site-styles/local_styles.css" rel="stylesheet" type="text/css">
+  <link href="/rsd-engineeringcourse/site-styles/ipython.css" rel="stylesheet" type="text/css">
+
+  <link rel="shortcut icon" href="/rsd-engineeringcourse/images/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" href="/rsd-engineeringcourse/favicon-152.png">
+    <meta name="msapplication-TileColor" content="#000000">
+    <meta name="msapplication-TileImage" content="/rsd-engineeringcourse/favicon-144.png">
+
+  <script src="/rsd-engineeringcourse/js/lib/modernizr-custom.js"></script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        // Center justify equations in code and markdown cells. Elsewhere
+        // we use CSS to left justify single line equations in code cells.
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        }
+    });
+    </script>
+
+    <script>
+      var cuttingTheMustard = document.querySelector && window.localStorage && window.addEventListener;
+
+      Modernizr.load({
+        //cutting the mustard as used by the BBC
+        test: cuttingTheMustard
+        //if old browser load the shiv
+        ,
+        nope: [
+          '/rsd-engineeringcourse/js/lib/html5shiv-printshiv.min.js', '/rsd-engineeringcourse/js/lib/respond.min.js'
+        ]
+      });
+      //set conditional assets for main.js
+      var globalSiteSpecificVars = {
+        pathToJquery: "/rsd-engineeringcourse/js/lib/jquery-1.9.1.min",
+        googleAnalyticsIdsArray: [] //specify array of site specific id's NOT UCL generic UA-943297-1
+      }
+      if (cuttingTheMustard) {
+        globalSiteSpecificVars.pathToJquery = '/rsd-engineeringcourse/js/lib/jquery-2.1.1.min';
+      }
+    </script>
+    <script src="/rsd-engineeringcourse/js/lib/require.min.js"></script>
+    <script src="/rsd-engineeringcourse/js/main.js"></script>
+    <script>
+      require.config({
+        baseUrl: '/rsd-engineeringcourse/js/lib'
+      });
+        require(["app/general", "app/searchWithAutoComplete", "app/tabs"]);//load the default stuff
+    </script>
+</head>
+
+<body id="index" class="layout-vertical layout-vertical--nav-1col">
+
+  <header class="header header--desktop">
+
+  <a class="header__close" href="#">
+    <img src="/rsd-engineeringcourse/images/close.png" class="lazy" data-src="//static.ucl.ac.uk/indigo/images/close.png" alt="X" />Close</a>
+
+  <div class="masthead">
+
+  <div class="wrapper clearfix">
+
+      <div class="masthead__search">
+					<form action="#" method="get">
+						<div class="search-form">
+							<input type="search" placeholder="Search UCL websites, people and more" class="search-form__input search-form__input--search" value="">
+						</div>
+						<input type="submit" name="sumbit" value="Go" class="btn search-form__input search-form__input--submit" />
+					</form>
+				</div>
+
+
+				<nav class="masthead__nav m-clear">
+					<ul class="masthead__list">
+						<li class="masthead__item"><a href="index.php" class="masthead__link">UCL Home</a>
+						</li>
+						<li class="masthead__item"><a href="prospective-students.php" class="masthead__link">Prospective students</a>
+						</li>
+						<li class="masthead__item"><a href="current-students.php" class="masthead__link">Current students</a>
+						</li>
+						<li class="masthead__item"><a href="staff.php" class="masthead__link">Staff</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+
+</div><!-- end .masthead -->
+
+
+  <div class="wrapper">
+
+    <div class="photograph">
+  <div class="brand">
+    <p class="brand__heading">MPHYG001: Research Software Engineering With Python</p>
+    <a href="/" class="brand__link"><span class="visually-hidden">Home</span></a>
+    <img src="//cdn.ucl.ac.uk/img/blank.gif" data-src="//static.ucl.ac.uk/indigo/images/ucl-logo.svg" alt="UCL logo" id="logo" class="brand__logo lazy">  
+  </div>
+</div>
+
+
+    <div class="sidebar">
+
+      <nav class="nav nav--mobile">
+        <ul>
+          
+
+
+
+
+        </ul>
+      </nav>
+
+      <nav class="nav nav--left">
+        <ul>
+          
+
+ <li class="active"> <a href="/rsd-engineeringcourse/ch00python/">Introduction to Python</a><ul> <li class="inactive"> <a href="/rsd-engineeringcourse/ch00python/00pythons.html">Many kinds of Python</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch00python/010exemplar.html">An example program</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch00python/015variables.html">Variables</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch00python/016using_functions.html">Using Functions</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch00python/023types.html">Types</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch00python/025containers.html">Containers</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch00python/028dictionaries.html">Dictionaries</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch00python/029structures.html">Structures</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch00python/030MazeSolution.html">Maze Solution</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch00python/032conditionality.html">Conditionality</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch00python/035looping.html">Looping</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch00python/036MazeSolution2.html">Maze Control Solution</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch00python/037comprehensions.html">Comprehensions</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch00python/038SolutionComprehension.html">Maze comprehension solution.</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch00python/04functions.html">Defining functions</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch00python/050import.html">Modules</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch00python/101Classes.html">Classes</a> </li> </ul> </li><li class="active"> <a href="/rsd-engineeringcourse/ch01data/">Research Data in Python</a><ul> <li class="inactive"> <a href="/rsd-engineeringcourse/ch01data/060files.html">Working with files</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch01data/061internet.html">Internet</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch01data/062csv.html">CSV</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch01data/064JsonYamlXML.html">Structured Datafiles</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch01data/065MazeSaved.html">Maze Files Solution</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch01data/066QuakeExercise.html">Earthquakes Exercise</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch01data/068QuakesSolution.html">Quakes Solution</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch01data/072plotting.html">Plotting</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch01data/082NumPy.html">Numerical Python</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch01data/084Boids.html">The Boids</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch01data/110Capstone.html">Understanding the Exemplar</a> </li> </ul> </li> <li class="active"> <a href="/rsd-engineeringcourse/ch02git/">Version Control</a><ul> <li class="inactive"> <a href="/rsd-engineeringcourse/ch02git/01Intro.html">Introduction to Version Control</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch02git/02Solo.html">Solo Git</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch02git/03Mistakes.html">Fixing Mistakes</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch02git/04Publishing.html">Publishing</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch02git/05Collaboration.html">Collaboration</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch02git/06ForkAndPull.html">Fork and Pull</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch02git/09GitTheory.html">Git Theory</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch02git/10Branches.html">Branches</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch02git/11Miscellany.html">Git miscellany</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch02git/12Remotes.html">Remotes</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch02git/13Rebase.html">Rebase</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch02git/14Bisect.html">Bisect</a> </li> </ul> </li> <li class="active"> <a href="/rsd-engineeringcourse/ch03tests/">Testing</a><ul> <li class="inactive"> <a href="/rsd-engineeringcourse/ch03tests/01testingbasics.html">Testing Basics</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch03tests/02SaskatchewanFields.html">The Fields of Saskatchewan</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch03tests/03Nose.html">Nose</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch03tests/04EnergyExample.html">Energy Example</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch03tests/05Mocks.html">Mocks</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch03tests/06Debugger.html">Debugger</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch03tests/07CI.html">Continuous Integration</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch03tests/08DiffusionExample.html">Diffusion Example</a> </li></ul> </li> <li class="active"> <a href="/rsd-engineeringcourse/ch04packaging/">Software Projects</a><ul> <li class="inactive"> <a href="/rsd-engineeringcourse/ch04packaging/010Installation.html">Installing Libraries</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch04packaging/01Libraries.html">Libraries</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch04packaging/025TextFiles.html">Writing Libraries</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch04packaging/02Argparse.html">Argparse</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch04packaging/035ExerciseGreengraph.html">Exercise- Packaging Greengraph</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch04packaging/03Packaging.html">Packaging</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch04packaging/04documentation.html">Documentation</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch04packaging/05Process.html">Agile and Waterfall</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch04packaging/06Licensing.html">Licensing</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch04packaging/07Issues.html">Issue Tracking</a> </li> </ul> </li><li class="active"> <a href="/rsd-engineeringcourse/ch05construction/">Construction and Design</a><ul><li class="inactive"> <a href="/rsd-engineeringcourse/ch05construction/01introduction.html">Construction</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch05construction/02conventions.html">Coding Conventions</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch05construction/03comments.html">Comments</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch05construction/05refactoring.html">Refactoring</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch05construction/06objects.html">Object Refactorings</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch05construction/08objects.html">Object Oriented Design</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch05construction/09patterns.html">Design Patterns</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch05construction/10boids.html">Exercise - Boids</a> </li> </ul> </li> <li class="active"> <a href="/rsd-engineeringcourse/ch07dry/">Advanced Programming Techniques</a><ul><li class="inactive"> <a href="/rsd-engineeringcourse/ch07dry/01intro.html">Don't Repeat Yourself</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch07dry/020Functional.html">Functional Programming</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch07dry/025Iterators.html">Iterators, Generators, Decorators, and Contexts</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch07dry/040Exceptions.html">Exceptions</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch07dry/050Operators.html">Operator Overloading</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/ch07dry/060Metaprogramming.html">Metaprogramming</a> </li></ul> </li><li class="active"> <a href="/rsd-engineeringcourse/ch08performance/">Programming for Speed</a><ul> <li class="active"> <a href="/rsd-engineeringcourse/ch08performance/010intro.html">Two Mandelbrots</a> </li> <li class="active"> <a href="/rsd-engineeringcourse/ch08performance/015mandels.html">Faster Mandelbrots?</a> </li> <li class="active"> <a href="/rsd-engineeringcourse/ch08performance/020numpy.html">NumPy</a> </li> <li class="active"> <a href="/rsd-engineeringcourse/ch08performance/040cython.html">Cython</a> </li> <li class="active"> <a href="/rsd-engineeringcourse/ch08performance/050scaling.html">Scaling</a> </li></ul> </li> <li class="active"> <a href="/rsd-engineeringcourse/session99/">Installation</a><ul><li class="inactive"> <a href="/rsd-engineeringcourse/session99/linux.html">Linux</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/session99/mac.html">Mac OSX</a> </li> <li class="inactive"> <a href="/rsd-engineeringcourse/session99/windows.html">Windows</a> </li></ul> </li> 
+
+        </ul>
+      </nav>
+
+    </div>
+    <!-- end .sidebar -->
+
+    <nav class="nav nav--top">
+      <ul>
+        
+      </ul>
+    </nav>
+
+  </div>
+  <!-- end .wrapper -->
+
+  </header>
+  <!-- end .header -->
+
+  <div class="site-content wrapper">
+
+    <header class="header header--mobile default-header">
+      <a class="header__open" href="#">
+        <img src="/rsd-engineeringcourse/images/ucl-menu.svg" alt="Menu" />
+      </a>
+    </header>
+
+    <div class="site-content__inner clearfix">
+      <div class="site-content__body">
+
+          
+            <nav class="breadcrumb clearfix">
+              <ul class="breadcrumb__list">
+                <li class="breadcrumb__item"><a href="http://www.ucl.ac.uk/">UCL</a></li>
+
+  
+    <li class="breadcrumb__item"><a href="http://www.ucl.ac.uk/ISD">ISD</a></li>
+  
+    <li class="breadcrumb__item"><a href="http://www.ucl.ac.uk/isd/services">Our services</a></li>
+  
+    <li class="breadcrumb__item"><a href="http://www.ucl.ac.uk/isd/services/research-it">Research IT</a></li>
+  
+    <li class="breadcrumb__item"><a href="http://www.ucl.ac.uk/isd/services/research-it/training">Training</a></li>
+  
+
+<li class="breadcrumb__item"><a href="/rsd-engineeringcourse/">MPHYG0001</a></li>
+
+
+
+              </ul>
+            </nav>
+           <div class="site-content__main">
+            
+               <div id="slidelink">
+                 <a href="/rsd-engineeringcourse/ch08performance/040cython.ipynb">Notebook download</a>
+               </div>
+            
+            
+          
+          
+
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Cython">Cython<a class="anchor-link" href="#Cython">&#182;</a></h2><p>Cython can be viewed as an extension of Python where variables and functions are annotated with extra information, in particular types. The resulting Cython source code will be compiled into optimized C or C++ code, and thereby yielding substantial speed-up of slow Python code. In other word, cython provides a way of writting Python with  comparable performance to that of C/C++.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Start--Coding-in-Cython">Start  Coding in Cython<a class="anchor-link" href="#Start--Coding-in-Cython">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Cython code must, unlike Python, be compiled. This happens in the following stages:</p>
+<ul>
+<li>The cython code in <code>.pyx</code> file will be translated to a <code>C</code> file.</li>
+<li>The <code>C</code> file will be compiled by a C compiler into a shared library, which will be directely loaded into Python. </li>
+</ul>
+<p>In ipython notebook, everything is a lot easier. One need only to load Cython extension (<code>%load_ext Cython</code>) at the beginning and put <code>%%cython</code> mark in front of cells of cython code. Cells with cython mark will be treated as a <code>.pyx</code> code and consequently, compiled into C.</p>
+<p>For details, please see <a href="http://docs.cython.org/src/quickstart/build.html">Building Cython Code</a>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Pure python Mandelbrot set:</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">xmin</span><span class="o">=-</span><span class="mf">1.5</span>
+<span class="n">ymin</span><span class="o">=-</span><span class="mf">1.0</span>
+<span class="n">xmax</span><span class="o">=</span><span class="mf">0.5</span>
+<span class="n">ymax</span><span class="o">=</span><span class="mf">1.0</span>
+<span class="n">resolution</span><span class="o">=</span><span class="mi">300</span>
+<span class="n">xstep</span><span class="o">=</span><span class="p">(</span><span class="n">xmax</span><span class="o">-</span><span class="n">xmin</span><span class="p">)</span><span class="o">/</span><span class="n">resolution</span>
+<span class="n">ystep</span><span class="o">=</span><span class="p">(</span><span class="n">ymax</span><span class="o">-</span><span class="n">ymin</span><span class="p">)</span><span class="o">/</span><span class="n">resolution</span>
+<span class="n">xs</span><span class="o">=</span><span class="p">[(</span><span class="n">xmin</span><span class="o">+</span><span class="p">(</span><span class="n">xmax</span><span class="o">-</span><span class="n">xmin</span><span class="p">)</span><span class="o">*</span><span class="n">i</span><span class="o">/</span><span class="n">resolution</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">resolution</span><span class="p">)]</span>
+<span class="n">ys</span><span class="o">=</span><span class="p">[(</span><span class="n">ymin</span><span class="o">+</span><span class="p">(</span><span class="n">ymax</span><span class="o">-</span><span class="n">ymin</span><span class="p">)</span><span class="o">*</span><span class="n">i</span><span class="o">/</span><span class="n">resolution</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">resolution</span><span class="p">)]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">mandel</span><span class="p">(</span><span class="n">position</span><span class="p">,</span><span class="n">limit</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
+    <span class="n">value</span><span class="o">=</span><span class="n">position</span>
+    <span class="k">while</span> <span class="nb">abs</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">&lt;</span><span class="mi">2</span><span class="p">:</span>
+        <span class="n">limit</span><span class="o">-=</span><span class="mi">1</span>
+        <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">position</span>
+        <span class="k">if</span> <span class="n">limit</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">limit</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Compiled by Cython:</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> Cython 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="n">cython</span>
+
+<span class="k">def</span> <span class="nf">mandel_cython</span><span class="p">(</span><span class="n">position</span><span class="p">,</span><span class="n">limit</span><span class="o">=</span><span class="mf">50</span><span class="p">):</span>
+    <span class="n">value</span><span class="o">=</span><span class="n">position</span>
+    <span class="k">while</span> <span class="nb">abs</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">&lt;</span><span class="mf">2</span><span class="p">:</span>
+        <span class="n">limit</span><span class="o">-=</span><span class="mf">1</span>
+        <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="o">**</span><span class="mf">2</span><span class="o">+</span><span class="n">position</span>
+        <span class="k">if</span> <span class="n">limit</span><span class="o">&lt;</span><span class="mf">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0</span>
+    <span class="k">return</span> <span class="n">limit</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's verify the result</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="n">f</span><span class="p">,</span> <span class="n">axarr</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">axarr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">([[</span><span class="n">mandel</span><span class="p">(</span><span class="nb">complex</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">]</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">ys</span><span class="p">],</span><span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+<span class="n">axarr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Pure Python&#39;</span><span class="p">)</span>
+<span class="n">axarr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">([[</span><span class="n">mandel</span><span class="p">(</span><span class="nb">complex</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">]</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">ys</span><span class="p">],</span><span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+<span class="n">axarr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Cython&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[5]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;matplotlib.text.Text at 0x2b0b7fe89eb8&gt;</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">timeit</span> [[mandel(complex(x,y)) for x in xs] for y in ys] # pure python
+<span class="o">%</span><span class="k">timeit</span> [[mandel_cython(complex(x,y)) for x in xs] for y in ys] # cython
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>782 ms ± 3.85 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+550 ms ± 12.9 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We have improved the performance of a factor of 1.5 by just using the cython compiler, <strong>without changing the code</strong>!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Cython-with-C-Types">Cython with C Types<a class="anchor-link" href="#Cython-with-C-Types">&#182;</a></h3><p>But we can do better by telling Cython what C data type we would use in the code. Note we're not actually writing C, we're writing Python with C types.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><em>typed variable</em></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="n">cython</span>
+<span class="k">def</span> <span class="nf">var_typed_mandel_cython</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mf">50</span><span class="p">):</span>
+    <span class="k">cdef</span> <span class="kt">double</span> <span class="kt">complex</span> <span class="nf">value</span> <span class="c"># typed variable</span>
+    <span class="n">value</span><span class="o">=</span><span class="n">position</span>
+    <span class="k">while</span> <span class="nb">abs</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">&lt;</span><span class="mf">2</span><span class="p">:</span>
+        <span class="n">limit</span><span class="o">-=</span><span class="mf">1</span>
+        <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="o">**</span><span class="mf">2</span><span class="o">+</span><span class="n">position</span>
+        <span class="k">if</span> <span class="n">limit</span><span class="o">&lt;</span><span class="mf">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0</span>
+    <span class="k">return</span> <span class="n">limit</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><em>typed function + typed variable</em></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="n">cython</span>
+<span class="k">cpdef</span> <span class="nf">call_typed_mandel_cython</span><span class="p">(</span><span class="n">double</span> <span class="nb">complex</span> <span class="n">position</span><span class="p">,</span>
+                               <span class="nb">int</span> <span class="n">limit</span><span class="o">=</span><span class="mf">50</span><span class="p">):</span> <span class="c"># typed function</span>
+    <span class="k">cdef</span> <span class="kt">double</span> <span class="kt">complex</span> <span class="nf">value</span> <span class="c"># typed variable</span>
+    <span class="n">value</span><span class="o">=</span><span class="n">position</span>
+    <span class="k">while</span> <span class="nb">abs</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">&lt;</span><span class="mf">2</span><span class="p">:</span>
+        <span class="n">limit</span><span class="o">-=</span><span class="mf">1</span>
+        <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="o">**</span><span class="mf">2</span><span class="o">+</span><span class="n">position</span>
+        <span class="k">if</span> <span class="n">limit</span><span class="o">&lt;</span><span class="mf">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0</span>
+    <span class="k">return</span> <span class="n">limit</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>performance of one number:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># pure python</span>
+<span class="o">%</span><span class="k">timeit</span> a=mandel(complex(0,0)) 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>15.2 µs ± 99.8 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># premitive cython</span>
+<span class="o">%</span><span class="k">timeit</span> a=mandel_cython(complex(0,0)) 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>9.91 µs ± 48.8 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># cython with C type variable</span>
+<span class="o">%</span><span class="k">timeit</span> a=var_typed_mandel_cython(complex(0,0)) 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>6.96 µs ± 52.9 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># cython with typed variable + function</span>
+<span class="o">%</span><span class="k">timeit</span> a=call_typed_mandel_cython(complex(0,0))
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>4.04 µs ± 40.7 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Cython-with-numpy-ndarray">Cython with numpy ndarray<a class="anchor-link" href="#Cython-with-numpy-ndarray">&#182;</a></h3><p>You can use NumPy from Cython exactly the same as in regular Python, but by doing so you are losing potentially high speedups because Cython has support for fast access to NumPy arrays.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">ymatrix</span><span class="p">,</span><span class="n">xmatrix</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">mgrid</span><span class="p">[</span><span class="n">ymin</span><span class="p">:</span><span class="n">ymax</span><span class="p">:</span><span class="n">ystep</span><span class="p">,</span><span class="n">xmin</span><span class="p">:</span><span class="n">xmax</span><span class="p">:</span><span class="n">xstep</span><span class="p">]</span>
+<span class="n">values</span><span class="o">=</span><span class="n">xmatrix</span><span class="o">+</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">ymatrix</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="n">cython</span>
+<span class="k">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="k">cimport</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> 
+
+<span class="k">cpdef</span> <span class="nf">numpy_cython_1</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">[</span><span class="n">double</span> <span class="nb">complex</span><span class="p">,</span> <span class="n">ndim</span><span class="o">=</span><span class="mf">2</span><span class="p">]</span> <span class="n">position</span><span class="p">,</span> 
+                     <span class="nb">int</span> <span class="n">limit</span><span class="o">=</span><span class="mf">50</span><span class="p">):</span> 
+    <span class="k">cdef</span> <span class="kt">np</span>.<span class="kt">ndarray</span>[<span class="nf">long</span><span class="p">,</span><span class="nf">ndim</span><span class="o">=</span><span class="mf">2</span><span class="p">]</span> <span class="n">diverged_at</span>
+    <span class="k">cdef</span> <span class="kt">double</span> <span class="kt">complex</span> <span class="nf">value</span>
+    <span class="k">cdef</span> <span class="kt">int</span> <span class="nf">xlim</span>
+    <span class="k">cdef</span> <span class="kt">int</span> <span class="nf">ylim</span>
+    <span class="k">cdef</span> <span class="kt">double</span> <span class="kt">complex</span> <span class="nf">pos</span>
+    <span class="k">cdef</span> <span class="kt">int</span> <span class="nf">steps</span>
+    <span class="k">cdef</span> <span class="kt">int</span> <span class="nf">x</span><span class="p">,</span> <span class="nf">y</span>
+
+    <span class="n">xlim</span><span class="o">=</span><span class="n">position</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span>
+    <span class="n">ylim</span><span class="o">=</span><span class="n">position</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span>
+    <span class="n">diverged_at</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">ylim</span><span class="p">,</span> <span class="n">xlim</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">xlim</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">ylim</span><span class="p">):</span>
+             <span class="n">steps</span><span class="o">=</span><span class="n">limit</span>
+             <span class="n">value</span><span class="o">=</span><span class="n">position</span><span class="p">[</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="p">]</span>
+             <span class="n">pos</span><span class="o">=</span><span class="n">position</span><span class="p">[</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="p">]</span>
+             <span class="k">while</span> <span class="nb">abs</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">&lt;</span><span class="mf">2</span> <span class="ow">and</span> <span class="n">steps</span><span class="o">&gt;=</span><span class="mf">0</span><span class="p">:</span>
+                <span class="n">steps</span><span class="o">-=</span><span class="mf">1</span>
+                <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="o">**</span><span class="mf">2</span><span class="o">+</span><span class="n">pos</span>
+             <span class="n">diverged_at</span><span class="p">[</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="p">]</span><span class="o">=</span><span class="n">steps</span>
+  
+    <span class="k">return</span> <span class="n">diverged_at</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Note the double import of numpy: the standard numpy module and a Cython-enabled version of numpy that ensures fast indexing of and other operations on arrays. Both import statements are necessary in code that uses numpy arrays. The new thing in the code above is declaration of arrays by np.ndarray.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">timeit</span> data_cy=[[mandel(complex(x,y)) for x in xs] for y in ys] # pure python
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>763 ms ± 2.44 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">timeit</span> data_cy=[[call_typed_mandel_cython(complex(x,y)) for x in xs] for y in ys] # typed cython
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>290 ms ± 5.08 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">timeit</span> numpy_cython_1(values) # ndarray
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>265 ms ± 3.33 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>A trick of using <code>np.vectorize</code></strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">numpy_cython_2</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">call_typed_mandel_cython</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">timeit</span> numpy_cython_2(values) #  vectorize
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>285 ms ± 24.6 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Calling-C-functions-from-Cython">Calling C functions from Cython<a class="anchor-link" href="#Calling-C-functions-from-Cython">&#182;</a></h3><p><strong>Example: compare <code>sin()</code> from Python and C library</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="n">cython</span>
+<span class="k">import</span> <span class="nn">math</span>
+<span class="k">cpdef</span> <span class="nf">py_sin</span><span class="p">():</span>
+    <span class="k">cdef</span> <span class="kt">int</span> <span class="nf">x</span>
+    <span class="k">cdef</span> <span class="kt">double</span> <span class="nf">y</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mf">1e7</span><span class="p">):</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="n">cython</span>
+<span class="k">from</span> <span class="nn">libc.math</span> <span class="k">cimport</span> <span class="n">sin</span> <span class="k">as</span> <span class="n">csin</span> <span class="c"># import from C library</span>
+<span class="k">cpdef</span> <span class="nf">c_sin</span><span class="p">():</span>
+    <span class="k">cdef</span> <span class="kt">int</span> <span class="nf">x</span>
+    <span class="k">cdef</span> <span class="kt">double</span> <span class="nf">y</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mf">1e7</span><span class="p">):</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">csin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">timeit</span> [math.sin(i) for i in range(int(1e7))] # python
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>2.37 s ± 8.34 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">timeit</span> py_sin()                                # cython call python library
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>1.7 s ± 4.9 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">timeit</span> c_sin()                                 # cython call C library
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>5.9 ms ± 3.83 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+ 
+
+
+
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  <!-- end .site-content -->
+
+  <footer class="footer wrapper">
+  <div class="footer__inner clearfix">
+             <article class="block block--col-1">
+                <h2 class="as-h5">Facilities</h2>
+                <ul class="footer__list list-unstyled">
+					<li class="footer__item"><a href="http://www.ucl.ac.uk/departments/faculties">Faculties and departments</a></li>
+					<li class="footer__item"><a href="http://www.ucl.ac.uk/library/">Library</a></li>
+					<li class="footer__item"><a href="http://www.ucl.ac.uk/museums">Museums and Collections</a></li>
+					<li class="footer__item"><a href="http://www.thebloomsbury.com/">UCL Bloomsbury Theatre</a></li>
+					<li class="footer__item"><a href="http://www.ucl.ac.uk/maps">Maps and buildings</a></li>
+				</ul>
+            </article>
+            <article class="block block--col-2">
+                <h2 class="as-h5">Locations</h2>
+                <ul class="footer__list list-unstyled">
+					<li class="footer__item"><a href="http://www.ucl.ac.uk/london">UCL and London</a></li>
+					<li class="footer__item"><a href="http://www.ucl.ac.uk/australia">UCL Australia</a></li>
+					<li class="footer__item"><a href="http://www.ucl.ac.uk/qatar">UCL Qatar</a></li>
+					<li class="footer__item"><a href="http://www.ucl.ac.uk/global">UCL Global</a></li>
+				</ul>
+            </article>
+            <article class="block block--col-3">
+                <h2 class="as-h5">Connect with us</h2>
+                <ul class="footer__list list-unstyled">
+					<li class="footer__item"><a href="http://www.ucl.ac.uk/alumni">Alumni</a></li>
+					<li class="footer__item"><a href="http://www.ucl.ac.uk/enterprise">Businesses</a></li>
+					<li class="footer__item"><a href="http://www.ucl.ac.uk/media">Media Relations</a></li>
+					<li class="footer__item"><a href="http://www.ucl.ac.uk/hr/jobs/">Jobs</a></li>
+					<li class="footer__item"><a href="http://www.ucl.ac.uk/makeyourmark">Give to UCL</a></li>
+				</ul>
+
+      </article>
+  
+    <hr class="clear">
+    <ul class="footer__list list-unstyled zero-bottom">
+      <li class="footer__item text-muted small">University College London,&nbsp;Gower Street,&nbsp;London,&nbsp;WC1E 6BT&nbsp;Tel:&nbsp;+44&nbsp;(0)&nbsp;20 7679 2000</li>
+    </ul>
+    <ul class="list-inline footer__list list-unstyled list-inline--divided">
+      <li class="text-muted small">Copyright © 2017-05-30 09:52:43 +0000 UCL</li>
+      <li class="text-muted small"><a href="#">Disclaimer</a>
+      </li>
+      <li class="text-muted small"><a href="#">Freedom of Information</a>
+      </li>
+      <li class="text-muted small"><a href="#">Accessibility</a>
+      </li>
+      <li class="text-muted small"><a href="#">Privacy</a>
+      </li>
+      <li class="text-muted small"><a href="#">Cookies</a>
+      </li>
+      <li class="text-muted small"><a href="#">Contact Us</a>
+      </li>
+    </ul>
+  </div>
+</footer>
+
+
+  <script src="/rsd-engineeringcourse/js/lib/require.min.js"></script>
+  <script src="/rsd-engineeringcourse/js/main.js"></script>
+    <script>
+      require.config({
+        baseUrl: '/rsd-engineeringcourse/js/lib'
+      });
+        require(["app/general", "app/searchWithAutoComplete", "app/tabs"]);//load the default stuff
+    </script>
+
+</body>
+
+</html>
+
